@@ -1,0 +1,180 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load custom %}
+
+{% block content %}
+    <input type="hidden" id="quantity-points-db" name="quantity_points_db" data-points="{{ quantity_points_db }}">
+
+    <div class="container" id="registro">
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        <div id="card-alert" class="card red red-transparent">
+                            <div class="card-content white-text">
+                                <p>
+                                    <i class="fas fa-exclamation-triangle"></i>&nbsp;{{ message }}
+                                </p>
+                            </div>
+                            <button type="button" class="alert-closed" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div class="row row-top">
+            <div class="col s12 l8">
+                <div class="row">
+                    <form id="form-register" class="col s12" method="post" action="{% url 'path_register_exp' %}"
+                          enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" id="substation_hidden" name="substation_hidden">
+                        <input type="hidden" id="level_tension_hidden" name="level_tension_hidden">
+                        <input type="hidden" id="measurement_point_hidden" name="measurement_point_hidden">
+
+                        <input id="points-cn" name="points_cn" type="hidden" value="{{ measurement_points.count }}">
+                        <h2 class="mb-sm mt-sm"><strong>Registro de Medidas (PRMTE)</strong></h2>
+                        <div class="row">
+                            <div class="input-field col s12 l6">
+                                <select id="client" name="client" title="">
+                                    <option value="__all__" selected>Todos</option>
+                                    {% for client in clients %}
+                                        <option value="{{ client.idclient }}"> {{ client.idclient }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="client">Coordinado</label>
+                            </div>
+                            <div class="input-field col s12 l6">
+                                <select id="substation" multiple="multiple" title="">
+                                    <option value="__all__">Todos</option>
+                                    {% for substation in substations %}
+                                        <option value="{{ substation.user_defined01 }}">{{ substation.user_defined01 }}&nbsp;({{ substation.dcount }})</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="substation">Subestación</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 l6">
+                                <select id="level-tension" multiple title="">
+                                    <option value="__all__">Todos</option>
+                                    {% for level_tension in level_tensions %}
+                                        <option value="{{ level_tension.user_defined03 }}">{{ level_tension.user_defined03 }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="level-tension">Nivel de Tensión</label>
+                            </div>
+                            <div class="input-field col s12 l6">
+                                <select id="measurement-point" multiple title="">
+                                    <option value="__all__">Todos</option>
+                                    {% for measurement_point in measurement_points %}
+                                        <option value="{{ measurement_point.idsocket }}">{{ measurement_point.idsocket }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="measurement-point">Punto de Medida</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 l12">
+                                <select id="months" name="months" title="">
+                                    {% for month in months %}
+                                        <option value="{{ month.key }}">{{ month.value }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="months">Periodo</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 l6">
+                                <p>
+                                    <label>
+                                        <input name="hr_or_min" type="radio" value="1H" data-value="HR" checked/>
+                                        <span>1 Hora</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="col s6 l6">
+                                <p>
+                                    <label>
+                                        <input name="hr_or_min" type="radio" value="15MIN" data-value="MIN"/>
+                                        <span>15 Minutos</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="col s6 l6">
+                                <p>
+                                    <label>
+                                        <input id="type-file" name="type_file" type="radio" value="xlsx" checked/>
+                                        <span>Excel XLSX</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="col s6 l6">
+                                <p>
+                                    <label>
+                                        <input id="type-file" name="type_file" type="radio" value="csv"/>
+                                        <span>CSV</span>
+                                    </label>
+                                </p>
+                            </div>
+                            <div class="col s6 l12">
+                                <a id="btn-reset" class="waves-effect waves-light btn btn-xs disabled">
+                                    <i class="fab fa-wpforms"></i>&nbsp;LIMPIAR
+                                </a>&nbsp;
+                                <button type="submit" id="download-btn"
+                                        class="waves-effect waves-light btn btn-xs right disabled">
+                                    <i class="fas fa-download"></i>&nbsp;DESCARGAR
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="block-region-right">
+                    <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                        <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                            <a href="/reportes">
+                                <h4 class="heading-primary mt-lg">
+                                    <strong>
+                                        <i class="fas fa-download"></i>&nbsp;Reportes Medidas Históricas
+                                    </strong>&nbsp;PRMTE
+                                </h4>
+                            </a>
+                            <a href="{% url 'path_binnacle_exp' %}">
+                                <h4 class="heading-primary mt-lg">
+                                    <strong>
+                                       <i class="fas fa-cloud-download-alt"></i> Bitácora de intervenciones
+                                    </strong>
+                                </h4>
+                            </a>
+
+                            <hr>
+                            <h4 class="heading-primary"><strong>Preguntas</strong> frecuentes:</h4>
+                            <ul class="collapsible first" data-collapsible="accordion">
+                                {% for question in questions %}
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <i class="fas fa-chevron-circle-right"></i>
+                                            {{ question.question }}
+                                        </div>
+                                        <div class="collapsible-body">
+                                            {{ question.answer|safe }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div><!--columna derecha-->
+        </div><!--DIV CLASS ROW-->
+    </div> <!--DIV CLASS CONTAINER-->
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'core/js/register/index.js' %}"></script>
+{% endblock %}

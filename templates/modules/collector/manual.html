@@ -1,0 +1,153 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load custom %}
+
+{% block stylesheets %}
+{% endblock %}
+{% block content %}
+    <section class="container">
+        <div class="row mt-6">
+            <div class="col s12 l12">
+                <h2 class="mb-sm mt-sm" id="contacto">
+                    <strong>Recolector de medidas manual</strong>
+                </h2>
+                <br>
+                <br>
+            </div>
+            <div class="col s12 l8">
+                <div class="row">
+                    <div class="col s12 12">
+                        <form id="measu-collector-manual-frm" class="col s12">
+                            <div class="input-field col s12 l6">
+                                <select id="client" name="client">
+                                    {% for client in clients %}
+                                        {% set '' as  selected %}
+                                        {% if forloop.first %}
+                                            {% set 'selected' as  selected %}
+                                        {% endif %}
+                                        <option value="{{ client.idclient }}" {{ selected }}> {{ client.idclient }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label for="client">Coordinado</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select id="measurement" name="measurement" title=""></select>
+                                <label for="measurement">ID Medidor</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="date-last" value="Date last" name="date_last" type="text"
+                                       class="validate" disabled>
+                                <label for="date-last">Última Lectura</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input placeholder="Fecha de Término" id="date-end" name="date_end" type="text"
+                                       class="validate">
+                                <label for="date_end">Fecha de Término</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <select id="interval" name="interval" title="">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4" selected>4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                </select>
+                                <label for="interval">Últimos Intervalos</label>
+                            </div>
+                            <div class="input-field col s12 l12">
+                                <input placeholder="Email" id="email" name="email" type="text" class="validate"
+                                       readonly="readonly">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="input-field col s12 l12">
+                                <textarea placeholder="Mensaje" id="message" name="message"
+                                          class="materialize-textarea"></textarea>
+                                <label for="textarea1">Mensaje</label>
+                            </div>
+                            <div class="col s12 l12">
+                                <a id="generate-btn" class="waves-effect waves-light btn btn-xs">
+                                    <i class="fas fa-file-csv"></i>&nbsp;GENERAR CSV
+                                </a>
+                                <a id="upload-btn" class="waves-effect waves-light btn btn-xs cn-generate-struct hide">
+                                    <i class="fas fa-file-upload"></i>&nbsp;SUBIR CSV
+                                </a>
+                                <a id="reset-btn" class="waves-effect waves-light btn btn-xs">
+                                    <i class="fab fa-wpforms"></i>&nbsp;LIMPIAR
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col s12 l12 mt-3 cn-generate-struct hide">
+                        <hr>
+                    </div>
+                    <div class="col s12 l12 mt-1 cn-generate-struct hide">
+                        <table id="table-generate" class="mdl-data-table table-xlsx" width="100%"></table>
+                    </div>
+                    <div class="col s12 l12 cn-generate-struct hide">
+                        <a class="waves-effect waves-light btn btn-xs" style="left: -20px;">
+                            <i class="material-icons left">send</i>&nbsp;Finalizar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="block-region-right">
+                    <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                        <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                            <h4 class="heading-primary mt-lg">
+                                <strong>
+                                    <i class="fas fa-user"></i>&nbsp;Coordinador: CGE
+                                </strong>
+                            </h4>
+                            <hr>
+                            <h4 class="heading-primary"><strong>Preguntas</strong> frecuentes:</h4>
+                            <ul class="collapsible four" data-collapsible="accordion">
+                                <li>
+                                    <div class="collapsible-header">
+                                        <i class="fas fa-chevron-circle-right"></i>¿Qué es un Esquema de Medida
+                                        de Energía (EME)?
+                                    </div>
+                                    <div class="collapsible-body"><p>This is first section.</p></div>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header">
+                                        <i class="fas fa-chevron-circle-right"></i>¿Cuál es el procedimiento de
+                                        conexión a la PRMTE?
+                                        <div class="collapsible-body"><p>This is third section.</p></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header">
+                                        <i class="fas fa-chevron-circle-right"></i>¿Cuál es el procedimiento de
+                                        aprobación de requisitos del Sistema
+                                        de Medidas de Energía para nuevas instalaciones?
+                                    </div>
+                                    <div class="collapsible-body"><p>This is third section.</p></div>
+                                </li>
+                                <li>
+                                    <div class="collapsible-header">
+                                        <i class="fas fa-chevron-circle-right"></i>¿Cuáles son las exigencias de
+                                        Verificación Periódicas de los
+                                        Medidores de Energía Eléctrica?
+                                    </div>
+                                    <div class="collapsible-body"><p>This is third section.</p></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'core/js/collector/manual.js' %}"></script>
+{% endblock %}

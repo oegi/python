@@ -1,0 +1,241 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="">
+        <ul class="sidenav" id="mobile-demo">
+            <li id="menu-item-11"
+                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-5 current_page_item menu-item-11">
+                <a href="#">Inicio</a></li>
+            <li id="menu-item-16" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16"><a
+                    href="#documenta">Documentacion</a></li>
+            <li id="menu-item-17" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-17"><a
+                    href="#aplica">Aplicaciones</a></li>
+            <li id="menu-item-549"
+                class="menu-item menu-item-type-post_type menu-item-object-portales menu-item-549"><a
+                    href="#report">Reportes</a></li>
+            <li id="menu-item-550"
+                class="menu-item menu-item-type-post_type menu-item-object-portales menu-item-550"><a
+                    href="#pregun">Preguntas</a></li>
+            <li id="menu-item-551"
+                class="menu-item menu-item-type-post_type menu-item-object-portales menu-item-551"><a
+                    href="#contact">Contacto</a></li>
+        </ul>
+
+        <div id="intro" class="parallax-container">
+            <section class="view hm-gradient" id="intro">
+                <div class="full-bg-img d-flex align-items-center full-bg-transparent">
+                    <div class="container">
+                        <div class="row no-gutters">
+                            <div class="text-center text-md-left margins"
+                                 style="    margin: 182px auto;">
+                                <div class="white-text">
+                                    <div class="wow fadeInLeft" data-wow-delay="0.3s"
+                                         style="visibility: visible; animation-name: fadeInLeft; animation-delay: 0.3s;">
+                                        <h1 class="h1-responsive font-bold mt-sm-5">Sistema de Medidas</h1>
+                                        <div class="h6">El Coordinador Eléctrico Nacional es un organismo técnico e
+                                            independiente,
+                                            encargado de la coordinación de la operación del conjunto de
+                                            instalaciones del Sistema Eléctrico Nacional
+                                            que operen interconectadas entre sí..
+                                        </div>
+                                    </div>
+                                    <br>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="section white">
+            <div class="row container">
+                <br>
+                <br>
+                <p class="grey-text text-darken-3 lighten-3">En esta página web se presentan las aplicaciones
+                    asociadas
+                    a la
+                    plataforma tecnológica de recepción de las medidas obtenidas directamente desde los medidores de
+                    energía
+                    eléctrica que participan en el pro de transferencias económicas del Coordinador Eléctrico
+                    Nacional.</p>
+            </div>
+        </div>
+        <!-- CONTENT ITERABLE -->
+        {% for menu in menus %}
+            {% if menu.category_set.all.count != 0 %}
+                <!--imagen .parallax-->
+
+
+                <section id="menu_{{ menu.id }}_main" class="view hm-gradient">
+                    <div class="full-bg-img d-flex align-items-center">
+                        <div id="documenta" class="parallax-container siguiente">
+                            <div class="parallax">
+                                <img src="{% static "core/images/parallax.jpeg" %}" alt="parallax"/>
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <strong>{{ menu.content_rich|safe }}</strong>
+                                        <h2 class="mb-none">
+                                            <strong>{{ menu.title }}</strong>
+
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <ul class="collapsible first" data-collapsible="accordion">
+                    {% for category in menu.category_set.all %}
+                        {% if category.is_active == True %}
+                            {% if category.title == "PREGUNTAS" %}
+                                {% for question in questions %}
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <i class="fas fa-chevron-circle-right"></i>
+                                            {{ question.question|upper }}
+                                        </div>
+                                        <div class="collapsible-body">
+                                            {{ question.answer|safe }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li>
+                                    <div class="collapsible-header">
+                                        {% if category.content_rich %}
+                                            {{ category.content_rich|safe }}
+                                        {% else %}
+                                            <i class="fas fa-chevron-circle-right"></i>
+                                            {{ category.title|upper }}
+                                        {% endif %}
+                                    </div>
+
+                                    {% if not category.content_rich %}
+                                        {% if category.questions_set.all.count == 0 %}
+                                            <div class="collapsible-body">
+
+                                                {% for content in category.content_set.all %}
+                                                    {% if content.is_active == True  %}
+                                                      {{ content.description|safe }}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if category.path_file is not None %}
+                                                    <div id="jstree_{{ category.id }}" class="jstree-cls"
+                                                         data-name="{{ category.title }}"
+                                                         data-path="{{ category.path_file }}"></div>
+                                                {% endif %} {# LOGIC JSTREE #}
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+
+            {% endif %}
+        {% endfor %}
+        <!-- END CONTENT ITERABLE -->
+
+
+        <!--imagen .parallax-->
+        <section class="view hm-gradient">
+            <div class="full-bg-img d-flex align-items-center">
+                <div id="contact" class="parallax-container siguiente">
+                    <div class="parallax">
+                        <img src="{% static "core/images/parallax.jpeg" %}" alt="parallax"/>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="#contacto"><i
+                                        class="icon-featured fas fa-envelope appear-animation animated bounceIn appear-animation-visible"
+                                        data-appear-animation="bounceIn"></i></a>
+                                <h2 class="mb-none"><strong>Contactanos</strong></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="parallax-container">
+            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                <div id="google_maps" class="google-map mg-top-zero">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3329.345572839708!2d-70.65774745036151!3d-33.440302180682544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9662c5a5c428818b%3A0x585760ebac1e75c6!2sTeatinos+280%2C+Santiago%2C+Regi%C3%B3n+Metropolitana!5e0!3m2!1ses!2scl!4v1540659065033"
+                            width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="contacto">
+            <div class="row">
+                <div class="col s12 l6">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <h2 class="mb-sm mt-sm"><strong>Contacto</strong></h2>
+                                <div class="input-field col s6">
+
+                                    <input id="first_name" type="text" class="validate">
+                                    <label for="first_name">Nombre</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="email" type="email" class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="theme" type="text" class="validate">
+                                    <label for="theme">Tema</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                    <label for="textarea1">Mensaje</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col s12 l6">
+                    <div class="block-region-right">
+                        <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                <h4 class="heading-primary mt-lg"><strong>Recepción</strong> de documentos</h4>
+                                <p>Teatinos 280, Piso 11, Lunes a Jueves de 09:00 a
+                                    17:00 (horario continuo). Viernes de 09:00 a 13:00 horas!</p>
+                                <hr>
+                                <h4 class="heading-primary"><strong>Síguenos</strong> en:</h4>
+                                <ul class="cen_redes">
+                                    <li><a href="http://coordinador-electrico.cardumendev.cl/facebook%20url"
+                                           class="icon-facebook"
+                                           title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="http://coordinador-electrico.cardumendev.cl/twitter%20url"
+                                           class="icon-twitter"
+                                           title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="http://coordinador-electrico.cardumendev.cl/youtube%20url"
+                                           class="icon-youtube"
+                                           title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                                    <li><a href="http://coordinador-electrico.cardumendev.cl/Linkedin%20Url"
+                                           class="icon-linkedin"
+                                           title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                                </ul>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--columna derecha-->
+            </div><!--DIV CLASS ROW-->
+        </div> <!--DIV CLASS CONTAINER-->
+    </div>
+    <a class="scroll-to-top hidden-mobile visible" href="#">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+{% endblock %}

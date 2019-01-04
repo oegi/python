@@ -1,0 +1,127 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load custom %}
+{% block content %}
+    <section class="container">
+        <div class="row mt-6">
+            <div class="col s12 l12">
+                <h2 class="mb-sm mt-sm" id="contacto">
+                    <strong>Recolector de Medidas (PRMTE)</strong>
+                </h2>
+                <br>
+                <br>
+            </div>
+            <div class="col s12 l8">
+                <div class="row">
+                    <div class="col s12 12">
+                        <form id="measurement-collector-form" class="col s12" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="input-field col s12 l6">
+                                    <select id="client" name="client">
+                                        {% for client in clients %}
+                                            {% set '' as  selected %}
+                                            {% if forloop.first %}
+                                                {% set 'selected' as  selected %}
+                                            {% endif %}
+                                            <option value="{{ client.idclient }}" {{ selected }}> {{ client.idclient }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label for="client">Coordinado</label>
+                                </div>
+                                <div class="input-field col s12 l6">
+                                    <select id="measurement" name="measurement"></select>
+                                    <label for="measurement">ID Medidor</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12 l6">
+                                    <input placeholder="Fecha de Inicio" id="date-start" type="text"
+                                           class="validate" name="date_start" readonly="readonly">
+                                    <label for="date-start">Fecha de Inicio</label>
+                                </div>
+                                <div class="input-field col s12 l6">
+                                    <input placeholder="Fecha de Fin" id="date-end" name="date_end" type="text"
+                                           class="validate">
+                                    <label for="date-end">Fecha de Fin</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12 l12">
+                                    <input placeholder="Email" id="email" name="email" type="text" class="validate"
+                                           value="" readonly="readonly">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="input-field col s12 l12">
+                                <textarea placeholder="Mensaje" id="message" name="message"
+                                          class="materialize-textarea"></textarea>
+                                    <label for="textarea1">Mensaje</label>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="input-field col s12 l12 text-center">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input form-control" id="attachment"
+                                               name="attachment">
+                                        <label style="cursor:pointer;" id="text-file" class="custom-file-label"
+                                               for="attachment">
+                                        <span class="btn btn-xs waves-effect waves-light warning-strong2 mt-lg">
+                                             <i class="fas fa-file-upload"></i>
+                                            <span id="text-upload">&nbsp;Cargar Archivo PRMTE</span>
+                                        </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <p></p>
+                            <hr>
+                            <div class="row">
+                                <div class="input-field col s12 l12">
+                                    <a id="send-btn" class="waves-effect waves-light btn btn-xs">
+                                        <i class="far fa-paper-plane"></i>&nbsp;ENVIAR
+                                    </a>
+                                    <a id="reset-btn" class="waves-effect waves-light btn btn-xs">
+                                        <i class="fab fa-wpforms"></i>&nbsp;LIMPIAR
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="block-region-right">
+                    <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                        <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                            <a href="">
+                                <h4 class="heading-primary mt-lg"><strong><i class="fas fa-download"></i>
+                                    Reportes Medidas Históricas</strong> PRMTE</h4>
+                            </a>
+                            <p>Descarga el Reporte </p>
+                            <hr>
+                            <h4 class="heading-primary"><strong>Preguntas</strong> frecuentes:</h4>
+                            <ul class="collapsible first" data-collapsible="accordion">
+                                {% for question in questions %}
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <i class="fas fa-chevron-circle-right"></i>
+                                            {{ question.question }}
+                                        </div>
+                                        <div class="collapsible-body">
+                                            {{ question.answer|safe }}
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'core/js/collector/index.js' %}"></script>
+{% endblock %}

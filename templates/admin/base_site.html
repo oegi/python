@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+
+
+{% block branding %}
+    <h1 id="site-name" style="text-transform: uppercase; font-size: 14px; font-weight: bold;">
+        <a href="{% url 'admin:index' %}"></a> Administración Sistemas de Medidas
+    </h1>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+{% endblock %}

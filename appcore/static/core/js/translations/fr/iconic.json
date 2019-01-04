@@ -1,0 +1,22 @@
+{
+    "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+    "sInfo": "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+    "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+    "sInfoThousands": ",",
+    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+    "sLoadingRecords": "<i class=\"fa fa-fw fa-lg fa-spinner fa-pulse\"></i>",
+    "sProcessing": "<i class=\"fa fa-fw fa-lg fa-cog fa-spin\"></i>",
+    "sSearch": "<i class=\"fa fa-fw fa-search\"></i>",
+    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+    "oPaginate": {
+        "sFirst": "<i class=\"fa fw fa-angle-double-left\"></i>",
+        "sLast": "<i class=\"fa fw fa-angle-double-right\"></i>",
+        "sNext": "<i class=\"fa fw fa-angle-right\"></i>",
+        "sPrevious": "<i class=\"fa fw fa-angle-left\"></i>"
+    },
+    "oAria": {
+        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+    }
+}

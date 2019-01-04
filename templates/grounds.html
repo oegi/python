@@ -1,0 +1,104 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load custom %}
+{% block content %}
+    <br><br><br>
+    <section class="container">
+        <div class="section no-pad-bot">
+            <div class="row">
+
+
+                <div class="col s12 l12">
+                    <h2 class="mb-sm mt-sm" id="contacto">
+                        <strong>Motivos</strong>
+                    </h2>
+                </div>
+
+                <div class="col s12 l9">
+                    <div id="introduction-grounds" class="section scrollspy">
+
+                        <div id="grounds" class="col s12">
+                            <div class="cnt-wrapper table-responsive">
+
+                                    <table id="tb-grounds" class="mdl-data-table table-xlsx   stripe" width="100%">
+                                        <thead class="blue lighten-5">
+                                        <tr>
+                                            <th style="text-align: left">Acciones</th>
+                                            <th style="text-align: left">Nombre</th>
+                                            <th style="text-align: left">Fecha de creación</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for reason in reasons %}
+                                            <tr>
+                                            <td style="text-align: left">
+                                                    <button data-edit="{{ reason.id }}"
+                                                            data-description="{{ reason.description }}"
+                                                            class="groundsmodify btn btn-xs waves-effect
+                                                            reason-edit-btn warning-strong">
+                                                        <i class="material-icons">edit</i>
+                                                    </button>
+                                                    <button data-delete="{{ reason.id }}"
+                                                            data-description="{{ reason.description }}"
+                                                            class="reason-delete-btn btn btn-xs waves-effect
+                                                            waves-light red">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                </td>
+                                                <td style="text-align: left">{{ reason.description }}</td>
+                                                <td style="text-align: left">{{ reason.date_created }}</td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col s12 l3">
+                    <div class="block-region-right">
+                        <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                <button class="btn-link">
+                                    <h4 class="reason-add-btn heading-primary mt-lg"><strong><i class="fas fa-layer-group"></i> Agregar
+                                        Motivo</strong></h4>
+                                </button>
+                                <p></p>
+
+
+                                <h4 class="heading-primary"><strong>Preguntas</strong> frecuentes:</h4>
+                                <ul class="collapsible first" data-collapsible="accordion">
+                                    {% for question in questions %}
+
+                                        <li>
+                                            <div class="collapsible-header">
+                                                <i class="fas fa-chevron-circle-right"></i>
+                                                {{ question.question }}
+                                            </div>
+                                            <div class="collapsible-body">
+                                                {{ question.answer|safe }}
+                                            </div>
+
+                                        </li>
+
+                                    {% endfor %}
+                                </ul>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'core/js/grounds/index.js' %}"></script>
+
+{% endblock %}

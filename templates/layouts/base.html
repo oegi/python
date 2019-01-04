@@ -1,0 +1,155 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="robots" content="noindex">
+    <title>Sistema de Medidas</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "core/images/logo-coordinador1-ConvertImage.ico" %}"/>
+    <link rel="stylesheet" href="{% static 'libs/fontaw/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/mt/css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/mt-design-icons/iconfont/material-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/jstree/themes/default/style.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/material-design-lite/css/material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/dt/css/dataTables.material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/bts-mt-datetm/css/bootstrap-material-datetimepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'libs/jq-confirm2/jquery-confirm.min.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/master.styles.css' %}">
+    <link rel="stylesheet" href="{% static 'core/css/release.styles.css' %}">
+    {% block stylesheets %} {% endblock %}
+
+</head>
+<body>
+{% csrf_token %}
+
+<nav class="navbar-fixed" role="navigation">
+    {% block navbar %}
+        <div class="nav-wrapper">
+            <div class="matenav container">
+                {% if request.path == '/' %}
+                    <div class="matenav container">
+                        <a href="{% url 'path_home' %}" class="brand-logo">
+                            <img src="{% static "core/images/logo.svg" %}" alt=""></a>
+                    </div>
+                {% endif %}
+                {% if request.path != '/' %}
+                    <div class="matenav container">
+                        <a href="{% url 'path_home' %}" class="brand-logo">
+                            <img src="{% static "core/images/logo.svg" %}" alt=""
+                                 style="margin-top: 4px;width: 86px;left: -112px;position: absolute;"></a>
+                    </div>
+                {% endif %}
+            </div>
+            {% if request.path != '/' %}
+                <a href="javascript:window.history.back();" class="" style="padding: 20px;">
+                    <i class="fas fa-arrow-circle-left"></i>
+                </a>
+            {% endif %}
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                {% if request.path == '/' %}
+                    <li id="menu-item-11"
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home
+                         current-menu-item page_item page-item-5 current_page_item menu-item-11">
+                        <a href="#{{ menu.id }}">Inicio</a></li>
+                    {% for menu in menus %}
+                        {% if menu.is_active == True %}
+                            {% if menu.category_set.all.count != 0 %}
+                                <li id="menu-item-16"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-16">
+                                    <a href="#menu_{{ menu.id }}_main">{{ menu }}</a></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if request.path != '/' %}
+                    <li id="sppiner-loading" class="cen_btn cen_btn-empresas hidden-l menu-item menu-item-type-post_type
+                menu-item-object-portales menu-item-551 cen_btn cen_btn-empresas hidden-l login" id="menu-item-552"
+                        style="background-color: #373a3d;padding: 0 24px !important; display: none;">
+                        <i class="fas fa-spinner fa-spin fa-2x fa-fw"></i>
+                    </li>
+                {% endif %}
+                <li class="cen_btn cen_btn-empresas hidden-l menu-item menu-item-type-post_type
+                menu-item-object-portales menu-item-551 cen_btn cen_btn-empresas hidden-l login" id="menu-item-551">
+                    <p class="login">Ingreso Coordinados</p></li>
+            </ul>
+        </div>
+    {% endblock %}
+</nav>
+{% block content %}{% endblock %}
+<!--footer-->
+<footer>
+    <div class="bg-grey-60 cen_box">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <p>Síguenos en:</p>
+                    <ul class="cen_redes">
+                        <li><a href="http://coordinador-electrico.cardumendev.cl/facebook%20url" class="icon-facebook"
+                               title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="http://coordinador-electrico.cardumendev.cl/twitter%20url" class="icon-twitter"
+                               title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="http://coordinador-electrico.cardumendev.cl/youtube%20url" class="icon-youtube"
+                               title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                        <li><a href="http://coordinador-electrico.cardumendev.cl/Linkedin%20Url" class="icon-linkedin"
+                               title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                    <p>Recepción de Documentos</p>
+                    <p class="color-grey-50 cen_small margin-bottom-2">Teatinos 280, Piso 11, Lunes a Jueves de 09:00 a
+                        17:00 (horario continuo). Viernes de 09:00 a 13:00 horas</p>
+                </div>
+                <div class="col-md-9">
+                    <div class="row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-grey-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 margin-bottom-2">
+                    <p class="color-white">TODOS LOS DERECHOS RESERVADOS. Coordinador Eléctrico 2018</p>
+                    <p>Dirección. Teatinos 280. Piso 11. Santiago Centro y Apoquindo N°4501, Piso 6, Las Condes,
+                        Santiago. </p>
+                </div>
+                <div class="col-md-5 cen_content-flex cen_align__v-center">
+                    <ul class="cen_content-flex">
+                        <li><a href="http://coordinador-electrico.cardumendev.cl/Google%20Play%20Url" target="_blank"
+                               class="cen_btn-google-play" title="Google Play"></a></li>
+                        <li><a href="http://coordinador-electrico.cardumendev.cl/App%20Store%20Url" target="_blank"
+                               class="cen_btn-app-store" title="App Store"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="{% static 'libs/jq/jquery.min.js' %}"></script>
+<script src="{% static 'libs/popper/umd/popper.min.js' %}"></script>
+<script src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
+<script id="dt-jquery" data-language="{% static 'libs/dt/translations/es/default.json' %}"
+        src="{% static 'libs/dt/js/jquery.dataTables.js' %}"></script>
+<script src="{% static 'libs/mt/js/materialize.min.js' %}"></script>
+<script src="{% static 'libs/dt/js/dataTables.material.min.js' %}"></script>
+<script src="{% static 'libs/jstree/jstree.min.js' %}"></script>
+<script src="{% static 'libs/moment/moment.min.js' %}"></script>
+<script src="{% static 'libs/moment/moment-with-locales.js' %}"></script>
+<script src="{% static 'libs/bts-mt-datetm/js/bootstrap-material-datetimepicker.js' %}"></script>
+<script src="{% static 'core/js/bts.mt.datepicker.js' %}"></script>
+<script src="{% static 'libs/jq-confirm2/jquery-confirm.min.js' %}"></script>
+<script src="{% static 'libs/jquery-validation/jquery.validate.min.js' %}"></script>
+<script src="{% static 'libs/jquery-validation/additional-methods.min.js' %}"></script>
+<script src="{% static 'libs/jquery-validation/localization/methods_es_CL.min.js' %}"></script>
+<script src="{% static 'libs/jquery-validation/localization/messages_es.min.js' %}"></script>
+<script src="{% static 'core/js/utils/jquery.validator.method.js' %}"></script>
+<script src="{% static 'core/js/token.js' %}"></script>
+<script src="{% static 'core/js/config.js' %}"></script>
+<script src="{% static 'core/js/master.js' %}"></script>
+<script src="{% static 'core/js/jstree.content.js' %}"></script>
+{% block javascript %}{% endblock %}
+</body>
+</html>

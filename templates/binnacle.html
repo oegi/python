@@ -1,0 +1,153 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load custom %}
+{% block content %}
+    <br xmlns="http://www.w3.org/1999/html"><br><br>
+    <section class="container">
+        <div class="section no-pad-bot">
+            <div class="row">
+                <div class="col s12 l12">
+                    <h2 class="mb-sm mt-sm" id="contacto">
+                        <strong>Bitácora (PRMTE)</strong>
+                    </h2>
+                </div>
+                <div class="col s12 l9">
+                    <div class="row">
+                        <div id="introduction" class="section scrollspy">
+                            <div class="input-field col s12 l4">
+                                <select id="period_int" name="period_int" title="" multiple>
+                                    <option value="__all__" selected>Todos</option>
+                                    {% for binnacle in binnacles %}
+                                        <option value="{{ binnacle.period_rescue }}">{{ binnacle.period_rescue }}</option>
+                                    {% endfor %}
+                                </select>
+                                <label>Periodo de Intervención</label>
+                            </div>
+                            <div class="input-field col s12 l4">
+                                <select id="origin" name="origin" title="">
+                                    <option value="__all__">Todos</option>
+                                    <option value="PRMTE">PRMTE</option>
+                                    <option value="MANUAL">MANUAL</option>
+                                </select>
+                                <label>Origen</label>
+                            </div>
+                            <div class="input-field col s12 l4">
+                                <select id="state" name="state" title="">
+                                    <option value="__all__" selected>Todos</option>
+                                    <option value="PENDIENTE">PENDIENTE</option>
+                                    <option value="FINALIZADO">FINALIZADO</option>
+                                </select>
+                                <label>Estado</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a id="btn-reset" class="waves-effect waves-light btn btn-xs"><i class="fab fa-wpforms"></i> LIMPIAR</a>
+                        <button id="search-btn" class="waves-effect waves-light btn btn-xs right">
+                            <i class="material-icons right">search</i> BUSCAR &nbsp;
+                        </button>
+                    </div>
+                    <div id="binnacle" class="row">
+                        <div class="table-responsive">
+                            <table id="tb-binnacle" class="mdl-data-table table-xlsx stripe"
+                                   data-edit="{% url 'path_binnacle_modify' %}" width="100%">
+                                <thead class="blue lighten-5">
+                                <tr>
+                                    <th></th>
+                                    <th style="text-align: left">ID_BITACORA</th>
+                                    <th style="text-align: left">ID_SOCKET</th>
+                                    <th style="text-align: left">Fecha Intervención</th>
+                                    <th style="text-align: left">Fecha Ini.Medida</th>
+                                    <th style="text-align: left">Fecha Fin Medida</th>
+                                    <th style="text-align: left">Estado</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for binnacle_pend in binnacles_pends %}
+                                    <tr>
+                                        <td style="text-align: left" class="content-width">
+                                            <a href="{% url 'path_binnacle_modify' %}?binnacle_id={{ binnacle_pend.id }}"
+                                               data-description="{{ reason.description }}"
+                                               class="groundsmodify btn btn-xs waves-effect
+                                                                    binnacle-edit-btn warning-strong">
+                                                <i class="material-icons">edit</i>
+                                            </a>
+                                            {% if binnacle_pend.origin == "PRMTE" %}
+                                                <button disabled data-delete="{{ binnacle_pend.id }}"
+                                                        data-cod_binnacle="{{ binnacle_pend.cod_binnacle }}"
+                                                        data-date_rescue="{{ binnacle_pend.date_rescue }}"
+                                                        data-idsocket="{{ binnacle_pend.idsocket }}"
+                                                        class="binnacle-delete-btn btn btn-xs waves-effect
+                                                                waves-light red">
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            {% else %}
+                                                <button data-delete="{{ binnacle_pend.id }}"
+                                                        data-cod_binnacle="{{ binnacle_pend.cod_binnacle }}"
+                                                        data-date_rescue="{{ binnacle_pend.date_rescue }}"
+                                                        data-idsocket="{{ binnacle_pend.idsocket }}"
+                                                        class="binnacle-delete-btn btn btn-xs waves-effect
+                                                                waves-light red">
+                                                    <i class="material-icons">delete</i>
+                                                </button>
+                                            {% endif %}
+                                        </td>
+                                        <td style="text-align: left">{{ binnacle_pend.cod_binnacle }}</td>
+                                        <td style="text-align: left">{{ binnacle_pend.idsocket }}</td>
+                                        <td style="text-align: left"> {{ binnacle_pend.date_rescue|date:'d/m/Y H:i:s' }} </td>
+                                        <td style="text-align: left">{{ binnacle_pend.date_start|date:'d/m/Y H:i:s' }}</td>
+                                        <td style="text-align: left">{{ binnacle_pend.date_end|date:'d/m/Y H:i:s' }}</td>
+                                        <td style="text-align: left">{{ binnacle_pend.state }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l3">
+                    <form id="form-binnacle" class="col s12" method="post" action="{% url 'path_binnacle_exp' %}">
+                        {% csrf_token %}
+                        <div class="block-region-right">
+                            <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                                <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                    <a id="download-btn" href="{% url 'path_binnacle_exp' %}">
+                                        <h4 class="heading-primary mt-lg"><strong><i
+                                                class="fas fa-cloud-download-alt"></i>
+                                            Descargar bitácora</strong></h4>
+                                    </a>
+                                    <hr>
+                                    <a href="{% url 'path_binnacle_grounds' %}">
+                                        <h4 class="heading-primary mt-lg"><strong><i class="fas fa-layer-group"></i>
+                                            Motivos</strong></h4>
+                                    </a>
+                                    <hr>
+                                    <h4 class="heading-primary"><strong>Preguntas</strong> frecuentes:</h4>
+                                    <ul class="collapsible first" data-collapsible="accordion">
+                                        {% for question in questions %}
+                                            <li>
+                                                <div class="collapsible-header">
+                                                    <i class="fas fa-chevron-circle-right"></i>
+                                                    {{ question.question }}
+                                                </div>
+                                                <div class="collapsible-body">
+                                                    {{ question.answer|safe }}
+                                                </div>
+
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'core/js/binnacle/index.js' %}"></script>
+{% endblock %}

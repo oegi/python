@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load custom %}
+{% block content %}
+    <br xmlns="http://www.w3.org/1999/html"><br><br>
+    <section class="container">
+        <div id="page-error" class="section no-pad-bot">
+            <div class="row">
+                <div class="col s6 l7">
+                    <div id="Error" class="col 12">
+                        <div class="cnt-wrapper table-responsive">
+                            <div class="col s12 l12">
+                                <h2 class="mb-sm mt-sm" id="contacto">
+                                    <strong>Operacion no permitda</strong>
+
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="col s6 l4">
+                    <div id="Error1" class="col 13">
+                        <div class="cnt-wrapper table-responsive">
+                            <div class="col s12 l12">
+                                <h2 class="mb-sm mt-sm" id="contacto">
+                                    <div class="error">
+                            <img src="{% static "core/images/405.png" %}" ></div>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

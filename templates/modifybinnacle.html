@@ -1,0 +1,176 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% load custom %}
+{% block content %}
+    <br><br><br>
+    <section class="container">
+        <div class="section no-pad-bot">
+            <div class="row">
+                <div class="col s12 l12">
+                    <h2 class="mb-sm mt-sm" id="contacto">
+                        <strong>Modificar Bitácora (PRMTE)</strong>
+                    </h2>
+                </div>
+                <div class="col s12 l9">
+                    <div id="introduction" class="section scrollspy">
+                        <form id="history" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="nnnn/AAMM" id="id-binnacle" name="id_binnacle"
+                                           type="text" class="validate"
+                                           value="{{ binnacle.cod_binnacle }}">
+                                    <label for="id-binnacle">Id_Bitacora</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled id="id-device" name="id_device" type="text" class="validate"
+                                           value="{{ binnacle.noins }}">
+                                    <label for="id-device">Id_Device</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled id="id-socket" name="id_socket" type="text" class="validate"
+                                           value="{{ binnacle.idsocket }}">
+                                    <label for="id-socket">Id_Socket</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="Fecha de Inicio" id="date-start" name="date_start"
+                                           type="text"
+                                           class="validate datepicker"
+                                           value="{{ binnacle.date_start|date:'d-m-Y H:i' }}">
+                                    <label for="date-start">Fecha de Inicio</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="Fecha de Fin" id="date-end" name="date_end" type="text"
+                                           class="validate datepicker timepicker"
+                                           value="{{ binnacle.date_end|date:'d-m-Y H:i' }}">
+                                    <label for="first_name">Fecha de Fin</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="Fecha de Intervención" id="date-intervention"
+                                           name="date_intervention" type="text"
+                                           value="{{ binnacle.date_rescue|date:'d-m-Y H:i' }}"
+                                           class="validate">
+                                    <label for="date-intervention">Fecha de Intervención</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="Subestación" id="origin" name="origin" type="text"
+                                           class="validate" value="{{ binnacle.origin }}">
+                                    <label for="origin">Origen</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="estado" id="state" name="state" type="text"
+                                           class="validate" value="{{ binnacle.state }}">
+                                    <label for="state">Estado</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="Subestación" id="substation" name="substation"
+                                           type="text"
+                                           class="validate" value="{{ binnacle.user_defined01 }}">
+                                    <label for="substation">Subestación</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="Tensión" id="tension" name="tension" type="text"
+                                           class="validate"
+                                           value="{{ binnacle.user_defined03 }}">
+                                    <label for="tension">Tensión</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="Paño" id="cloth" name="cloth" type="text"
+                                           class="validate"
+                                           value="{{ binnacle.user_defined02 }}">
+                                    <label for="cloth">Paño</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input disabled placeholder="Coordinado" id="client" name="client" type="text"
+                                           class="validate" value="{{ binnacle.idclient }}">
+                                    <label for="client">Coordinado</label>
+                                </div>
+                            </div>
+                            <div class="row"></div>
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    {% set '' as user_binnacle %}
+                                    {% if binnacle.user is not None %}
+                                        {% set binnacle.user as user_binnacle %}
+                                    {% endif %}
+                                    <input disabled placeholder="USUARIO" id="username" name="username" type="text"
+                                           class="validate" value="{{ user_binnacle }}">
+                                    <label for="username">Responsable</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <select title="" id="reason" name="reason">
+                                        <option value="" selected>Seleccione la opción</option>
+                                        {% for reason in reasons %}
+                                            {% set '' as is_selected %}
+                                            {% if reason.id == binnacle.reason.id %}
+                                                {% set 'selected' as is_selected %}
+                                            {% endif %}
+                                            <option data-id="{{ reason.id }}" value="{{ reason.description }}"
+                                                    {{ is_selected }}>{{ reason.description }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <label for="reason">Motivo</label>
+                                </div>
+
+                                <div class="input-field col s4">
+                                    <input id="mante-num" name="mante_num" required="false"
+                                           placeholder="N° Inter. Mante." type="number"
+                                           class="validate" value="{{ binnacle.mante_num }}">
+                                    <label for="mante-num">N° Inter. Mante.</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <textarea id="comment" name="comment" required class="materialize-textarea" placeholder="Comentario" maxlength="500">{% if binnacle.comments %}{{ binnacle.comments }}{% endif %}</textarea>
+                                    <label for="comment">Comentario</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12">
+                                    <a id="btn-finalizar" class="btn-finalizar waves-effect waves-light btn btn-xs"
+                                       data-id="{{ binnacle.id }}" data-reason-id="{{ reason.id }}"
+                                       data-reason-description="{{ reason_description }}"
+                                       data-mante-num="{{ binnacle.mante_num }}" style="float: right;">
+                                        <i class="material-icons left">refresh</i>&nbsp;Finalizar
+                                    </a>&nbsp;
+                                    <a id="btn-grabar" class="waves-effect waves-light btn btn-xs"
+                                       data-id="{{ binnacle.id }}"
+                                       data-reason-id="{{ reason.id }}"
+                                       data-reason-description="{{ reason_description }}"
+                                       data-mante-num="{{ binnacle.mante_num }}" style="float: right;">
+                                        <i class="material-icons left">send</i>&nbsp;Grabar
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col s12 l3">
+                    <div class="block-region-right">
+                        <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                            <div class="clearfix text-formatted field field--name-body
+                            field--type-text-with-summary field--label-hidden field__item">
+                                <h4 class="heading-primary"><strong>Preguntas</strong> frecuentes:</h4>
+                                <ul class="collapsible first" data-collapsible="accordion">
+                                    {% for question in questions %}
+                                        <li>
+                                            <div class="collapsible-header">
+                                                <i class="fas fa-chevron-circle-right"></i>
+                                                {{ question.question }}
+                                            </div>
+                                            <div class="collapsible-body">
+                                                {{ question.answer|safe }}
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'core/js/binnacle/index.js' %}"></script>
+{% endblock %}

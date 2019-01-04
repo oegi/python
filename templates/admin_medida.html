@@ -1,0 +1,110 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <input type="hidden" id="substation_hidden">
+    <div class="container" id="admin">
+        <div class="row row-top">
+            <div class="col s12 l8">
+                <div class="row">
+                    <h2 class="mb-sm mt-sm"><strong>Administrar Punto de Medida (PRMTE)</strong></h2>
+                    <div class="row">
+                        <div class="input-field col s12 l6">
+                            <select id="client" name="client" title="">
+                                <option value="__all__" data-query="__all__">Todos</option>
+                                {% for client in clients %}
+                                    <option value="{{ client.idclient }}"> {{ client.idclient }}</option>
+                                {% endfor %}
+                            </select>
+                            <label>Coordinado</label>
+                        </div>
+                        <div class="input-field col s12 l6">
+                            <select id="substation" name="substation" multiple title="">
+                                <option value="__all__">Todos</option>
+                                {% for substation in substations %}
+                                    <option value="{{ substation.user_defined01 }}">{{ substation.user_defined01 }}</option>
+                                {% endfor %}
+                            </select>
+                            <label>Subestación</label>
+                        </div>
+
+
+                    </div>
+                    <div class="row  ">
+                        <a id="btn-reset" class="waves-effect waves-light btn">
+                            <i class="fas fa-trash left"></i>LIMPIAR
+                        </a>
+                        <button id="search-btn" class="waves-effect waves-light btn right">
+                            <i class="material-icons right">search</i>BUSCAR
+                        </button>
+                    </div>
+                    <table id="measure-admin" class="mdl-data-table">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center;">Punto de Medida</th>
+                            <th style="text-align: center;">Subestacion</th>
+                            <th style="text-align: center;">Estado</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        {% for socket in sockets %}
+                            <tr >
+                                <td style="text-align: center;" id="{{ socket.idsocket }}">{{ socket.idsocket }}</td>
+                                <td style="text-align: center;" id="{{ socket.user_defined01 }}">{{ socket.user_defined01 }}</td>
+                                <td style="text-align: center;">
+                                    <div class="switch">
+                                        <label>
+
+                                                {% if socket.socket_hide == 1  %}
+                                                    Inactivo<input type="checkbox" data-edit="{{ socket.idsocket }}" checked>
+                                                    <span class="checked lever"></span>Activo
+                                                {% else %}
+                                                    Inactivo<input type="checkbox" data-edit="{{ socket.idsocket }}" >
+                                                    <span class="checked lever"></span>Activo
+                                                {% endif %}
+
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+            <div class="col s12 l4">
+                <div class="block-region-right">
+                    <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                        <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                            <h4 class="heading-primary"><strong>Preguntas</strong> frecuentes:</h4>
+                            <ul class="collapsible first" data-collapsible="accordion">
+                                {% for question in questions %}
+
+                                    <li>
+                                        <div class="collapsible-header">
+                                            <i class="fas fa-chevron-circle-right"></i>
+                                            {{ question.question }}
+                                        </div>
+                                        <div class="collapsible-body">
+                                            {{ question.answer|safe }}
+                                        </div>
+                                    </li>
+
+                                {% endfor %}
+                            </ul>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div><!--columna derecha-->
+        </div><!--DIV CLASS ROW-->
+    </div> <!--DIV CLASS CONTAINER-->
+{% endblock %}
+
+{% block javascript %}
+    <script src="{% static 'core/js/admin_medida/index.js' %}"></script>
+{% endblock %}

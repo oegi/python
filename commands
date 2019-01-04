@@ -1,0 +1,6 @@
+# GET MODEL DATABASE
+python manage.py inspectdb --database=prime  model >  dump.py
+
+# TRANSLATE MESSAGES
+django-admin makemessages -l es_CL
+django-admin compilemessages

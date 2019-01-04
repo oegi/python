@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container" id="admin">
+        <div class="row row-top">
+            <div class="col s12 l8">
+                <div class="row">
+                    <form class="col s11">
+                        <h2 class="mb-sm mt-sm" ><strong>Reportes Medidas Históricas PRMTE</strong></h2>
+                        <div id="jstree_{{ category.id }}" class="jstree-cls" data-name="{{ category.title }}" data-path="{{ category.path_file }}"></div>
+
+                    </form>
+                </div>
+            </div>
+                    <div class="col s12 l4">
+                  {% if question %}
+                    <div class="block-region-right">
+                        <div class="block block-block-content block-block-contente6a439bd-7c41-440d-b8d0-7aeefaba5504">
+                            <div class="clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item">
+                                <h4 class="heading-primary"><strong>Preguntas</strong> frecuentes:</h4>
+                                     <ul class="collapsible first" data-collapsible="accordion">
+                                        {% for question in questions %}
+
+                                                 <li>
+                                                     <div class="collapsible-header">
+                                                         <i class="fas fa-chevron-circle-right"></i>
+                                                         {{ question.question }}
+                                                     </div>
+                                                     <div class="collapsible-body">
+                                                         {{ question.answer|safe  }}
+                                                     </div>
+                                                 </li>
+
+                                        {% endfor %}
+                                     </ul>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                  {% endif %}
+                </div><!--columna derecha-->
+        </div><!--DIV CLASS ROW-->
+    </div> <!--DIV CLASS CONTAINER-->
+{% endblock %}
+
+{% block javascript %}
+       <script src="{% static 'core/js/admin_medida/index.js' %}"></script>
+{% endblock %}

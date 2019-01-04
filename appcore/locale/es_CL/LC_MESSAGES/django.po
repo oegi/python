@@ -1,0 +1,245 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-10 16:13-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: appcore/admin/category.py:11 appcore/admin/role_menu.py:11
+#: appcore/models.py:87
+msgid "Menus"
+msgstr "Menus"
+
+#: appcore/admin/category.py:12
+msgid "Enlace Aplicaciones"
+msgstr "Enlace Aplicaciones"
+
+#: appcore/admin/category.py:13
+msgid "Path File"
+msgstr "Ruta Archivo"
+
+#: appcore/admin/content.py:11 appcore/admin/question.py:11
+#: appcore/admin/role_category.py:11 appcore/models.py:109
+#: appcore/models.py:118 appcore/models.py:135
+msgid "Categories"
+msgstr "Categorias"
+
+#: appcore/admin/menu.py:10
+msgid "Imagen"
+msgstr "Imagen"
+
+#: appcore/admin/menu.py:11 appcore/admin/question.py:12
+msgid "Order"
+msgstr "orden"
+
+#: appcore/admin/role_category.py:10 appcore/admin/role_menu.py:10
+msgid "Roles"
+msgstr "Roles"
+
+#: appcore/admin/role_category.py:12 appcore/admin/role_menu.py:12
+msgid "Activo"
+msgstr "Activo"
+
+#: appcore/admin/user.py:22
+msgid "Personal info"
+msgstr "Información personal"
+
+#: appcore/admin/user.py:23
+msgid "Permissions"
+msgstr "Permisos"
+
+#: appcore/admin/user.py:24 appcore/models.py:34
+msgid "Type of roles"
+msgstr "Tipo de Roles"
+
+#: appcore/models.py:10 appcore/models.py:24 appcore/models.py:35
+#: appcore/models.py:40 appcore/models.py:58
+msgid "Role"
+msgstr "Rol"
+
+#: appcore/models.py:11 appcore/models.py:26 appcore/models.py:44
+#: appcore/models.py:62 appcore/models.py:79 appcore/models.py:100
+#: appcore/models.py:119 appcore/models.py:137 appcore/models.py:160
+#: appcore/models.py:161 appcore/models.py:169 appcore/models.py:259
+#: appcore/models.py:271 appcore/models.py:282 appcore/models.py:557
+#: appcore/models.py:594
+msgid "date created"
+msgstr "Fecha Creación"
+
+#: appcore/models.py:19
+msgid "Users"
+msgstr "Usuarios"
+
+#: appcore/models.py:20 appcore/models.py:42 appcore/models.py:60
+#: appcore/models.py:162 appcore/models.py:256
+msgid "User"
+msgstr "Usuario"
+
+#: appcore/models.py:25 appcore/models.py:43 appcore/models.py:61
+#: appcore/models.py:133
+msgid "Active"
+msgstr "Activo"
+
+#: appcore/models.py:25 appcore/models.py:43 appcore/models.py:61
+#: appcore/models.py:258
+msgid "is active"
+msgstr "Estado"
+
+#: appcore/models.py:39 appcore/models.py:57 appcore/models.py:279
+msgid "Name"
+msgstr "Nombre"
+
+#: appcore/models.py:41 appcore/models.py:88
+msgid "Menu"
+msgstr "Menu"
+
+#: appcore/models.py:52
+msgid "Profiles Menus"
+msgstr "Perfiles Menus"
+
+#: appcore/models.py:53
+msgid "Profile Menu"
+msgstr "Perfil Menu"
+
+#: appcore/models.py:59 appcore/models.py:110
+msgid "Category"
+msgstr "Categoría"
+
+#: appcore/models.py:70
+msgid "Profiles Categories"
+msgstr "Perfiles Categorías"
+
+#: appcore/models.py:71
+msgid "Profile Category"
+msgstr "Perfil de Categoria"
+
+#: appcore/models.py:97
+msgid "Content Rich"
+msgstr "Contenido"
+
+#: appcore/models.py:120 appcore/models.py:260
+msgid "date update"
+msgstr "Fecha Actualización"
+
+#: appcore/models.py:127
+msgid "Contents"
+msgstr "Contenidos"
+
+#: appcore/models.py:128
+msgid "Content"
+msgstr "Contenido"
+
+#: appcore/models.py:132 appcore/models.py:146
+msgid "Question"
+msgstr "Preguntas"
+
+#: appcore/models.py:134
+msgid "Answer"
+msgstr "Respuesta"
+
+#: appcore/models.py:145
+msgid "Questions"
+msgstr "Preguntas"
+
+#: appcore/models.py:151 appcore/models.py:175
+msgid "Binnacle"
+msgstr "Bitacora"
+
+#: appcore/models.py:152
+#, fuzzy
+#| msgid "date created"
+msgid "Date rescue"
+msgstr "Fecha Creación"
+
+#: appcore/models.py:153
+msgid "Period rescue"
+msgstr ""
+
+#: appcore/models.py:155
+msgid "Socket"
+msgstr "punto"
+
+#: appcore/models.py:156
+msgid "User defined 01"
+msgstr "Subestación"
+
+#: appcore/models.py:157
+msgid "User defined 02"
+msgstr "Paño"
+
+#: appcore/models.py:158
+msgid "User defined 03"
+msgstr "Tensión"
+
+#: appcore/models.py:159 appcore/models.py:257 appcore/models.py:281
+msgid "Description"
+msgstr "Descripcion"
+
+#: appcore/models.py:164 appcore/models.py:165 appcore/models.py:265
+msgid "Reason"
+msgstr "Razon"
+
+#: appcore/models.py:166
+msgid "Comments"
+msgstr "Comentarios"
+
+#: appcore/models.py:167
+msgid "Origin"
+msgstr "Origen"
+
+#: appcore/models.py:168
+msgid "state"
+msgstr "Estado"
+
+
+#: appcore/models.py:174
+msgid "Binnacles"
+msgstr "Bitacora"
+
+#: appcore/models.py:204
+msgid "Measures Details"
+msgstr "Detalles de Medidas"
+
+#: appcore/models.py:205
+msgid "Measure Detail"
+msgstr "Detalle Medidas"
+
+#: appcore/models.py:264
+msgid "Reasons"
+msgstr "Razon"
+
+#: appcore/models.py:280
+msgid "Value"
+msgstr "valor"
+
+#: appcore/models.py:287
+msgid "Parameters"
+msgstr "Parámetros"
+
+#: appcore/models.py:288
+msgid "Parameter"
+msgstr "Parámetro"
+
+#: appcore/models.py:592
+#, fuzzy
+#| msgid "date update"
+msgid "date start"
+msgstr "Fecha Actualización"
+
+#: appcore/models.py:593
+#, fuzzy
+#| msgid "date created"
+msgid "date end"
+msgstr "Fecha Creación"
