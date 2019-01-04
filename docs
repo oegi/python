@@ -1,3 +1,0 @@
-# FORMAT DECIMALS TO REGIONAL
-locale.setlocale(locale.LC_ALL, 'es_CL.utf-8')
-locale.format_string('%.2f', variable, grouping=True)
